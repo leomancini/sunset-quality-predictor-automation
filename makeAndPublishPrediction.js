@@ -1,6 +1,9 @@
 import fetch from 'node-fetch';
 import { SECRETS } from './config.js';
 
+import { Builder, By, Key, until } from 'selenium-webdriver';
+import Safari from 'selenium-webdriver/safari.js';
+
 function subtractHours(numOfHours, date) {
   date.setHours(date.getHours() - numOfHours);
 
@@ -18,10 +21,7 @@ async function checkIfPredictionAlreadyPublished(date) {
 }
 
 async function publishPrediction() {
-  const { Builder, By, Key, until } = require('selenium-webdriver');
-  const safari = require('selenium-webdriver/safari');
-
-  let options = new safari.Options();
+  let options = new Safari.Options();
   let driver = await new Builder()
     .forBrowser('safari')
     .setSafariOptions(options)
