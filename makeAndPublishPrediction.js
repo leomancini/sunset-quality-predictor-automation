@@ -56,8 +56,7 @@ async function checkEligibility() {
   const predictionAlreadyPublished = await checkIfPredictionAlreadyPublished(todayYYYYMMDD);
 
   if (!predictionAlreadyPublished && compareTimes(now, oneHourBeforeSunsetTime) <= 6) {
-    console.log('OK RUN SCRIPT');
-    // publishPrediction();
+    publishPrediction();
   }
 }
 
