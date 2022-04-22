@@ -37,7 +37,6 @@ async function publishPrediction() {
 }
 
 async function checkEligibility() {
-  // let now = new Date('2022-03-25T18:16:00'); // DEBUG
   let now = new Date();
   let todayYYYYMMDD = `${now.toLocaleDateString('en-US', { year: 'numeric' })}-${now.toLocaleDateString('en-US', { month: '2-digit' })}-${now.toLocaleDateString('en-US', { day: '2-digit' })}`;
 
@@ -55,7 +54,7 @@ async function checkEligibility() {
 
   const predictionAlreadyPublished = await checkIfPredictionAlreadyPublished(todayYYYYMMDD);
 
-  if (!predictionAlreadyPublished && compareTimes(now, oneHourBeforeSunsetTime) <= 6) {
+  if (!predictionAlreadyPublished && compareTimes(now, oneHourBeforeSunsetTime) <= 10) {
     publishPrediction();
   }
 }
