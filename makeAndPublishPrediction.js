@@ -29,7 +29,7 @@ async function publishPrediction() {
 
   await driver.get('http://localhost/sunset-quality-predictor/model/predict.html#today');
 
-  let minutesToKeepPageOpen = 5;
+  let minutesToKeepPageOpen = 4;
 
   await driver.sleep(minutesToKeepPageOpen * 60 * 1000);
 
