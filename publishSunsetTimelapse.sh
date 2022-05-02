@@ -45,13 +45,13 @@ if [ "$SUNSET_ALREADY_PUBLISHED" = 0 ]; then
 
     SUNSET_TIME=$(curl --silent "$SUNSET_API_PROXY_URL?lat=40.730610&lng=-73.935242&date=$DATE" | jq -r '.results.sunset')
     SUNSET_TIME_ET=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC" +'%T')
-    SUNSET_TIME_ET_MINS_BEFORE=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC - 120 minutes" +'%H-%M')
-    SUNSET_TIME_ET_MINS_AFTER=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC + 120 minutes" +'%H-%M')
+    SUNSET_TIME_ET_MINS_BEFORE=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC - 60 minutes" +'%H-%M')
+    SUNSET_TIME_ET_MINS_AFTER=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC + 60 minutes" +'%H-%M')
 
     CAMERA="SKYLINE"
     START="$DATE-$SUNSET_TIME_ET_MINS_BEFORE"
     END="$DATE-$SUNSET_TIME_ET_MINS_AFTER"
-    FPS=30
+    FPS=20
 
     printf "Initializing variables...\n\n"
 
@@ -130,7 +130,7 @@ if [ "$SUNSET_ALREADY_PUBLISHED" = 0 ]; then
 
     curl "$PUBLISH_SERVER_URL?date=$DATE&password=$UPLOAD_PASSWORD"
 
-    printf "\nCleaning up...\n"
+    printf "\n\nCleaning up...\n"
 
     ssh $TIMELAPSE_SERVER_USER@$TIMELAPSE_SERVER_IP "rm -r /$TIMELAPSE_SERVER_ROOT/.auto-timelapse-temp/"
 
