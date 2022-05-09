@@ -32,7 +32,7 @@ if [ -z ${DATE+x} ]; then
     DATE=$(date +"%Y-%m-%d")
 fi
 
-# Run script for specified date
+Run script for specified date
 printf "\nChecking for existing timelapse video for ${PURPLE}$DATE${NC}...\n"
 
 SUNSET_ALREADY_PUBLISHED=$(($(curl --silent -I $PUBLISH_SERVER_HISTORY_URL/$DATE.mp4 \
@@ -44,13 +44,13 @@ if [ "$SUNSET_ALREADY_PUBLISHED" = 0 ]; then
     printf "Getting sunset time for ${PURPLE}$DATE${NC} in New York...\n"
 
     SUNSET_TIME=$(curl --silent "$SUNSET_API_PROXY_URL?lat=40.730610&lng=-73.935242&date=$DATE" | jq -r '.results.sunset')
-    SUNSET_TIME_ET=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC" +'%T')
-    SUNSET_TIME_ET_MINS_BEFORE=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC - 60 minutes" +'%H-%M')
-    SUNSET_TIME_ET_MINS_AFTER=$(TZ=US/Eastern gdate -d "$SUNSET_TIME UTC + 60 minutes" +'%H-%M')
+    SUNSET_TIME_ET=$(TZ=US/Eastern gdate -d "$SUNSET_TIME")
+    SUNSET_TIME_ET_MINS_BEFORE=$(TZ=US/Eastern gdate -d "$SUNSET_TIME_ET - 60 minutes" +'%F-%H-%M')
+    SUNSET_TIME_ET_MINS_AFTER=$(TZ=US/Eastern gdate -d "$SUNSET_TIME_ET + 60 minutes" +'%F-%H-%M')
 
     CAMERA="SKYLINE"
-    START="$DATE-$SUNSET_TIME_ET_MINS_BEFORE"
-    END="$DATE-$SUNSET_TIME_ET_MINS_AFTER"
+    START=$SUNSET_TIME_ET_MINS_BEFORE
+    END=$SUNSET_TIME_ET_MINS_AFTER
     FPS=20
 
     printf "Initializing variables...\n\n"
