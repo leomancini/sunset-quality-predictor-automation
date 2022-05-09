@@ -6,7 +6,7 @@ import Safari from 'selenium-webdriver/safari.js';
 
 function subtractHours(numOfHours, date) {
   let milliseconds = date.getTime();
-  var millisecondsToAdd = numOfHours * 60 * 60 * 1000;
+  let millisecondsToAdd = numOfHours * 60 * 60 * 1000;
   let newDate = new Date(milliseconds - millisecondsToAdd);
 
   return newDate;
