@@ -32,7 +32,7 @@ if [ -z ${DATE+x} ]; then
     DATE=$(date +"%Y-%m-%d")
 fi
 
-Run script for specified date
+# Run script for specified date
 printf "\nChecking for existing timelapse video for ${PURPLE}$DATE${NC}...\n"
 
 SUNSET_ALREADY_PUBLISHED=$(($(curl --silent -I $PUBLISH_SERVER_HISTORY_URL/$DATE.mp4 \
