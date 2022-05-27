@@ -17,7 +17,7 @@ function compareTimes(first, second) {
 }
 
 async function checkIfPredictionAlreadyPublished(date) {
-  let request = await fetch(`${SECRETS.PUBLISH_SERVER_URL}history/predictions/${date}.json`);
+  let request = await fetch(`http://localhost/sunset-quality-predictor/data/compositeImagesBeforeSunset/forPrediction/${date}.jpg`);
 
   return request.ok;
 }
