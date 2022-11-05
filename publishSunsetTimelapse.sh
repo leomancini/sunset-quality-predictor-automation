@@ -43,7 +43,7 @@ if [ "$SUNSET_ALREADY_PUBLISHED" = 0 ]; then
     printf "No existing timelapse video found...\n"
     printf "Getting sunset time for ${PURPLE}$DATE${NC} in New York...\n"
 
-    SUNSET_TIME=$(curl --silent "$SUNSET_API_PROXY_URL?lat=40.730610&lng=-73.935242&date=$DATE" | jq -r '.results.sunset')
+    SUNSET_TIME=$(curl --silent "$SUNSET_API_PROXY_URL?date=$DATE" | jq -r '.results.sunset')
     SUNSET_TIME_ET=$(TZ=US/Eastern gdate -d "$SUNSET_TIME")
     SUNSET_TIME_ET_MINS_BEFORE=$(TZ=US/Eastern gdate -d "$SUNSET_TIME_ET - 60 minutes" +'%F-%H-%M')
     SUNSET_TIME_ET_MINS_AFTER=$(TZ=US/Eastern gdate -d "$SUNSET_TIME_ET + 60 minutes" +'%F-%H-%M')

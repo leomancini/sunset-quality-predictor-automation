@@ -42,7 +42,7 @@ async function checkEligibility() {
   let now = new Date();
   let todayYYYYMMDD = `${now.toLocaleDateString('en-US', { year: 'numeric' })}-${now.toLocaleDateString('en-US', { month: '2-digit' })}-${now.toLocaleDateString('en-US', { day: '2-digit' })}`;
 
-  let sunsetTimeRequest = await fetch(`${SECRETS.SUNSET_API_PROXY_URL}?lat=40.730610&lng=-73.935242&date=${todayYYYYMMDD}&timezone=ET`);
+  let sunsetTimeRequest = await fetch(`${SECRETS.SUNSET_API_PROXY_URL}?date=${todayYYYYMMDD}&timezone=ET`);
   let sunsetTimeResponse = await sunsetTimeRequest.json();
 
   let sunsetTime = new Date(sunsetTimeResponse.timestamp * 1000);
